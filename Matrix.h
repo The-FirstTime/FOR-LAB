@@ -1,28 +1,18 @@
-//
-// Created by Арсений  Ростовщиков on 21.10.2023.
-//
-
 #ifndef UNTITLED4_MATRIX_H
 #define UNTITLED4_MATRIX_H
+#pragma once
 
 
-class Matrix {
-    private:
-        double * m_ptr;
-        int m_rows;
-        int m_columns;
+class matrix{
+public:
+    matrix(int m_rows, int m_columns);
+    int Rows();
+    int Columns();
 
-    public:
-        Matrix(int m_rows, int m_columns){
-            Matrix * = new Students;
-        };
-        int rows();
-        int columns();
-        bool empty();
-        void reshape();
-        ~Matrix();
 
+private:
+    double *ptr;
+    int rows;
+    int columns;
 };
-
-
 #endif //UNTITLED4_MATRIX_H

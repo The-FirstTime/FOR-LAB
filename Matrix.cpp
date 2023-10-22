@@ -1,21 +1,19 @@
-//
-// Created by Арсений  Ростовщиков on 21.10.2023.
-//
-
 #include "Matrix.h"
+#include <iostream>
 
-int Matrix::rows(){
-    return m_rows;
-};
 
-int Matrix::columns(){
-    return m_columns;
-};
 
-bool Matrix::empty(){
-    return m_rows * m_columns == 0;
-};
 
-void reshape(int new_rows, int new_columns){
+matrix::matrix(int m_rows, int m_columns){
+    rows = m_rows;
+    columns = m_columns;
+    ptr = new double [m_rows * m_columns];
+}
 
-};
+int matrix::Rows(){
+    return(matrix::rows);
+}
+
+int matrix::Columns(){
+    return(matrix::columns);
+}
