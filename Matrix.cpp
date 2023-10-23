@@ -33,6 +33,35 @@ linalg::matrix::matrix(const matrix &obj) {
     }
 }
 
+linalg::matrix::matrix(std::initializer_list<double> list){
+    columns = list.size();
+    rows = 1;
+    ptr = new double [columns * rows];
+    int i = 0;
+    for (auto elem: list){
+        ptr[i] = elem;
+        i++;
+    }
+}
+
+linalg::matrix::matrix(std::initializer_list<std::initializer_list<double>> list){
+    rows = list.size();
+    columns = list.begin()->size();
+    ptr = new double [columns * rows];
+    int i = 0, j = 0;
+    for (auto row: list){
+        if (row.size() != columns){
+            throw std::invalid_argument("Invalid initializer list");
+        }
+        for(auto elem: row){
+            ptr[i*j + j] = elem;
+            j++;
+            j %= columns;
+        }
+        i++;
+    }
+}
+
 
 int linalg::matrix::Rows(){
     return(matrix::rows);

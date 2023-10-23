@@ -2,6 +2,8 @@
 #define UNTITLED4_MATRIX_H
 #pragma once
 
+#include <initializer_list>
+
 namespace linalg {
     class matrix {
     public:
@@ -9,6 +11,10 @@ namespace linalg {
         matrix();
         matrix(int m_rows);
         matrix(matrix const &obj);
+
+        //initializer_list
+        matrix(std::initializer_list<double> list);
+        matrix(std::initializer_list<std::initializer_list<double>> list);
 
         int Rows();
 

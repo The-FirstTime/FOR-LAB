@@ -34,7 +34,11 @@ int main(){
         return 1;
     };
 
-    std::cout << "new num of rows: " << m.Rows();
-    
+    std::cout << "new num of rows: " << m.Rows() << "\n";
+
+
+    linalg::matrix init{1,2,3,4,5};
+    linalg::matrix init2{{1,2,3}, {1,2,3}, {3,2,1}, {4,5,6}};
+    std::cout << "num of rows: " << init2.Rows() << "\t" << "num of columns: " << init2.Columns();
     return 0;
 }
