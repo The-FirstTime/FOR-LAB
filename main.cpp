@@ -38,7 +38,11 @@ int main(){
 
 
     linalg::matrix init{1,2,3,4,5};
-    linalg::matrix init2{{1,2,3}, {1,2,3}, {3,2,1}, {4,5,6}};
-    std::cout << "num of rows: " << init2.Rows() << "\t" << "num of columns: " << init2.Columns();
+    linalg::matrix init2{{7, 8, 9}, {1,2,3}, {3,2,1}, {4,5,6}};
+    std::cout << "num of rows: " << init2.Rows() << "\t" << "num of columns: " << init2.Columns() << "\n";
+
+    double k = init2(2, 0);
+
+    init2.print();
     return 0;
 }
