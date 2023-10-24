@@ -12,6 +12,7 @@ namespace linalg {
         matrix();
         matrix(int m_rows);
         matrix(matrix const &obj);//copy constructor
+        matrix(matrix& other)noexcept; //move constructor
         //initializer_list
         matrix(std::initializer_list<double> list);
         matrix(std::initializer_list<std::initializer_list<double>> list);
@@ -22,11 +23,13 @@ namespace linalg {
         void print();
         bool empty();
         void reshape(int new_rows, int new_columns);
+        double norm();
 
         //operators:
-        int operator()(int i, int j);
+       // int operator()(int i, int j);
         void operator=(matrix const &obj);
-
+        double& operator()(int row, int column);
+        void operator=(std::initializer_list<std::initializer_list<double>> list);
 
     private:
         double *ptr;
@@ -37,4 +40,5 @@ namespace linalg {
 
 }
 
+linalg::matrix concatenate(linalg::matrix m1, linalg::matrix m2);
 #endif //UNTITLED4_MATRIX_H

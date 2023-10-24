@@ -42,10 +42,14 @@ int main(){
     linalg::matrix init3{{1, 1, 1}, {1,1,1}, {1,1,1}, {1,1,1}};
     std::cout << "num of rows: " << init2.Rows() << "\t" << "num of columns: " << init2.Columns() << "\n";
 
+
     double k = init2(2, 0);
-    init2.print();
-    init3.print();
-    init2 = init3;
-    init3.print();
+    init2(1,2) = k;
+    linalg::matrix resultat = concatenate(init2, init3);
+
+    resultat.print();
+
+
+
     return 0;
 }

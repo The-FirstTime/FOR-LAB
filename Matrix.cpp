@@ -20,6 +20,16 @@ linalg::matrix::matrix(int m_rows){
 
 }
 
+linalg::matrix::matrix(linalg::matrix& other) noexcept {
+    ptr = other.ptr;
+    rows = other.rows;
+    columns = other.columns;
+    other.ptr = nullptr;
+    other.rows = 0;
+    other.columns = 0;
+}
+
+
 linalg::matrix::matrix(const matrix &obj) {
     rows = obj.rows;
     columns = obj.columns;
@@ -83,9 +93,15 @@ void linalg::matrix::print() {
     }
 }
 
-int linalg::matrix::operator() (int i, int j){
+/**int linalg::matrix::operator() (int i, int j){
     return ptr[i*columns + j];
+}**/
+
+double& linalg::matrix::operator()(int row, int column) {
+    return ptr[row * columns + column];
 }
+
+
 void linalg::matrix::operator=(linalg::matrix const &obj){
     if (rows == obj.rows && columns == obj.columns){
         for(int i = 0; i < rows; i++){
@@ -120,3 +136,16 @@ void linalg::matrix::reshape(int new_rows, int new_columns){
     }
 }
 
+linalg::matrix concatenate(linalg::matrix m1, linalg::matrix m2){
+    linalg::matrix result (m1.Rows(), m1.Columns() + m2.Columns());
+    for (int i = 0; i < m1.Rows(); i++){
+        for (int j = 0; j < m1.Columns(); j++){
+            result(i,j) = m1(i, j);
+        }
+        for (int j = 0; j < m2.Columns(); j++){
+            double temp = m2(i, j);
+            result(i, j+m1.Columns()) = temp;
+        }
+    }
+    return result;
+}
