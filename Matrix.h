@@ -24,12 +24,31 @@ namespace linalg {
         bool empty();
         void reshape(int new_rows, int new_columns);
         double norm();
-
+        void swap_rows(int row_index);
+        void gaus_forward();
+        void gaus_back();
         //operators:
        // int operator()(int i, int j);
         void operator=(matrix const &obj);
         double& operator()(int row, int column);
         void operator=(std::initializer_list<std::initializer_list<double>> list);
+
+        friend matrix operator+(const matrix& x, const matrix& y);
+        friend matrix operator-(const matrix& x, const matrix& y);
+
+        matrix& operator+=(const matrix& x);
+        matrix& operator-=(const matrix& x);
+
+        friend matrix operator*(const matrix& x, const matrix& y);
+        friend matrix operator*(double a, const matrix& x);
+        matrix operator*(double a);
+
+        matrix& operator*=(const matrix& x);
+        matrix& operator*=(double a);
+
+        friend bool operator==(const matrix& x, const matrix& y) noexcept;
+        friend bool operator!=(const matrix& x, const matrix& y) noexcept;
+
 
     private:
         double *ptr;
@@ -37,8 +56,9 @@ namespace linalg {
         int columns;
     };
 
-
 }
 
 linalg::matrix concatenate(linalg::matrix m1, linalg::matrix m2);
+linalg::matrix transpose(linalg::matrix m1);
+
 #endif //UNTITLED4_MATRIX_H

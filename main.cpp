@@ -36,20 +36,16 @@ int main(){
 
     std::cout << "new num of rows: " << m.Rows() << "\n";
 
-
-    linalg::matrix init{1,2,3,4,5};
-    linalg::matrix init2{{7, 8, 9999}, {1,2,3}, {3,2,1}, {4,5,6}};
-    linalg::matrix init3{{1, 1, 1}, {1,1,1}, {1,1,1}, {1,1,1}};
+    linalg::matrix init0{{1,1,1}, {1,1,1}, {1,1,1}};
+    linalg::matrix init1{{2,2,2},{2,2,2},{2,2,2}};
+    linalg::matrix init2{{7, 8, 9999}, {1,2,3}, {3,2,1}, {1, 1, 1}};
+    linalg::matrix init3{{1, 1, 1, 9}, {1, 1, 1, 1}, {2,22,2, 9}, {3, 3, 3, 9}};
     std::cout << "num of rows: " << init2.Rows() << "\t" << "num of columns: " << init2.Columns() << "\n";
+    std::cout << "num of rows: " << init3.Rows() << "\t" << "num of columns: " << init3.Columns() << "\n";
 
-
-    double k = init2(2, 0);
-    init2(1,2) = k;
-    linalg::matrix resultat = concatenate(init2, init3);
-
-    resultat.print();
-
-
+    (init3 * init3).print();
+    init0 += init1;
+    init0.print();
 
     return 0;
 }
