@@ -194,6 +194,7 @@ bool linalg::operator==(const matrix& x, const matrix& y) noexcept{
     return true;
 }
 
+
 bool linalg::operator!=(const linalg::matrix& x, const linalg::matrix& y) noexcept{
     return !(x==y);
 }
@@ -229,7 +230,49 @@ void linalg::matrix::swap_rows(int row_index) {
     }
 }
 
-void linalg::matrix::gaus_forward() {
+double linalg::matrix::norm() {
+    double result = 0.0;
+    for (int i = 0; i < rows * columns; i++) {
+        result += pow(std::abs(ptr[i]), 2);
+    }
+    result = sqrt(result);
+    return result;
+}
+
+double linalg::matrix::trace() {
+    double trace = 0.0;
+    int min_dim = std::min(rows, columns);
+    for (int i = 0; i < min_dim; i++) {
+        trace += ptr[i * columns + i];
+    }
+    return trace;
+}
+
+double linalg::matrix::det() {
+    if (rows != columns) {
+        throw std::invalid_argument ("Wrong matrix size");
+    }
+    int n = rows;
+
+    // Приведем матрицу к треугольному виду
+    linalg::matrix m = (rows, columns);
+    for (int i = 0; i < rows; i++){
+        for(int j = 0; j < columns; j++){
+            m.ptr[i*columns + j] = ptr[i*columns + j];
+        }
+    }
+    m.gaus_forward();
+    // Вычислим определитель как произведение диагональных элементов
+    double det = 1.0;
+    for (int i = 0; i < n; i++) {
+        det *= m.ptr[i * n + i];
+    }
+
+    return det;
+}
+
+
+void linalg::matrix::gaus_forward() {/*
     int n = std::min(rows, columns);
     for (int i = 0; i < rows; i++) {
         if(i > n) {
@@ -252,6 +295,21 @@ void linalg::matrix::gaus_forward() {
             }
         }
     }
+    */
+
+    int n = rows;
+
+    for (int col = 0; col < n - 1; col++) {
+        for (int row = col + 1; row < n; row++) {
+            double factor = ptr[row * n + col] / ptr[col * n + col];
+
+            for (int k = col; k < n; k++) {
+                ptr[row * n + k] -= ptr[col * n + k] * factor;
+            }
+        }
+    }
+
+
 }
 
 

@@ -39,13 +39,18 @@ int main(){
     linalg::matrix init0{{1,1,1}, {1,1,1}, {1,1,1}};
     linalg::matrix init1{{2,2,2},{2,2,2},{2,2,2}};
     linalg::matrix init2{{7, 8, 9999}, {1,2,3}, {3,2,1}, {1, 1, 1}};
-    linalg::matrix init3{{1, 1, 1, 9}, {1, 1, 1, 1}, {2,22,2, 9}, {3, 3, 3, 9}};
+    linalg::matrix init3{{1, 2, 3}, {1, 1, 1}, {5, 7, 4}};
     std::cout << "num of rows: " << init2.Rows() << "\t" << "num of columns: " << init2.Columns() << "\n";
     std::cout << "num of rows: " << init3.Rows() << "\t" << "num of columns: " << init3.Columns() << "\n";
 
-    (init3 * init3).print();
+    (init2 * init3).print();
     init0 += init1;
     init0.print();
+    init3.print();
+    std::cout << init3.det() << std::endl;
+
+    init3.gaus_forward();
+    init3.print();
 
     return 0;
 }

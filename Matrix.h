@@ -23,8 +23,10 @@ namespace linalg {
         void print();
         bool empty();
         void reshape(int new_rows, int new_columns);
-        double norm();
         void swap_rows(int row_index);
+        double norm();
+        double trace();
+        double det();
         void gaus_forward();
         void gaus_back();
         //operators:
