@@ -1,9 +1,6 @@
 #include "Matrix.h"
 #include <iostream>
 
-
-
-
 linalg::matrix::matrix(int m_rows, int m_columns){
     rows = m_rows;
     columns = m_columns;
@@ -66,7 +63,7 @@ linalg::matrix::matrix(std::initializer_list<std::initializer_list<double>> list
 
 void linalg::matrix::print() {
     int max = 0, n = 0;
-    for (int i = 1; i < rows; i++) {
+    for (int i = 0; i < rows; i++) {
         for (int j = 0; j < columns; j++) {
             if (ptr[i*columns + j] > max) {
                 max = ptr[i*columns + j];
@@ -76,10 +73,10 @@ void linalg::matrix::print() {
     for(;max>1; n++){
         max/=10;
     }
-    std::cout << "length of max symbol: " << n << std::endl;
+    std::cout << "Matrix: " << std::endl;
     for(int i = 0; i < rows; i++){
         for(int j = 0; j < columns; j++){
-            std::cout.width(n+1);
+            std::cout.width(n+2);
             std::cout << ptr[i*columns + j];
         }
         std::cout << std::endl;
@@ -89,6 +86,17 @@ void linalg::matrix::print() {
 int linalg::matrix::operator() (int i, int j){
     return ptr[i*columns + j];
 }
+void linalg::matrix::operator=(linalg::matrix const &obj){
+    if (rows == obj.rows && columns == obj.columns){
+        for(int i = 0; i < rows; i++){
+            for (int j = 0; j < columns; j++){
+                ptr[i*columns + j] = obj.ptr[i*columns + j];
+            }
+        }
+    }
+    else throw std::invalid_argument("Wrong size");
+}
+
 
 int linalg::matrix::Rows(){
     return(matrix::rows);
@@ -111,3 +119,4 @@ void linalg::matrix::reshape(int new_rows, int new_columns){
         columns = new_columns;
     }
 }
+
